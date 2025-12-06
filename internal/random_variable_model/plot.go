@@ -2,6 +2,8 @@ package randomvariablemodel
 
 import (
 	"image/color"
+	"os"
+	"path/filepath"
 
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
@@ -31,6 +33,10 @@ func Plot(
 	meta *MetaInfo,
 	lines ...float64,
 ) error {
+	dir := filepath.Dir(filename)
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		return err
+	}
 	p := plot.New()
 	p.Title.Text = meta.Title
 	p.X.Label.Text = meta.XLabel
