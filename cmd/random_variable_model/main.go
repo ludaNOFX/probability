@@ -3,11 +3,20 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	randomvariablemodel "github.com/ludaNOFX/probability/internal/random_variable_model"
 )
 
 func main() {
+	rootDir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	rootDir = filepath.Dir(filepath.Dir(rootDir))
+	densityPath := filepath.Join(rootDir, "filestore", "random_variable_model", "density.png")
+	cdfPath := filepath.Join(rootDir, "filestore", "random_variable_model", "cdf.png")
 	fmt.Print("Введите реальное число из своего варианта: ")
 	inputD, err := randomvariablemodel.ScanRealDigit(randomvariablemodel.GetStdin())
 	if err != nil {
@@ -65,7 +74,7 @@ func main() {
 	fmt.Println("D =", variance)
 	fmt.Println("σ =", sigma)
 
-	err = randomvariablemodel.Plot(density, "density.png", metaDensity, mean, median, mode)
+	err = randomvariablemodel.Plot(density, densityPath, metaDensity, mean, median, mode)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -78,12 +87,12 @@ func main() {
 		height,
 	)
 
-	err = randomvariablemodel.Plot(cdf, "cdf.png", metaCdf, mean, median, mode)
+	err = randomvariablemodel.Plot(cdf, cdfPath, metaCdf, mean, median, mode)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("\n=== ВЫВОДЫ ПО РАБОТЕ ===")
+	fmt.Println("\nВЫВОДЫ ПО РАБОТЕ")
 	fmt.Printf("1. Для a = %.1f нормировочная константа c = %.4f\n", inputD, params.C)
 	fmt.Printf("2. Плотность распределения: f(x) = %.4f(x + %.1f) на [0, 1]\n", params.C, params.A)
 	fmt.Printf("3. Функция распределения: F(x) = %.4f(0.5x² + %.1fx) на [0, 1]\n", params.C, params.A)
@@ -99,6 +108,4 @@ func main() {
 	} else {
 		fmt.Printf("8. M = Me (симметричное распределение)\n")
 	}
-
-	fmt.Printf("9. Все характеристики отображены на графиках\n")
 }
