@@ -36,3 +36,5 @@ vendor/
 
 # Local filestore
 /filestore/
+/computer_simulation
+/random_variable_model
