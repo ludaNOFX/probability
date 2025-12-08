@@ -8,7 +8,7 @@ import (
 )
 
 func SetupPaths(project *internal.PrjMap) (internal.PathMap, error) {
-	rootDir, err := internal.FindRootDir(2)
+	rootDir, err := internal.FindRootDir(1)
 	if err != nil {
 		return nil, fmt.Errorf("Setup path error: %w", err)
 	}

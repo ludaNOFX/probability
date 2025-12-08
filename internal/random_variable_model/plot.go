@@ -10,23 +10,6 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-type MetaInfo struct {
-	Title  string
-	XLabel string
-	YLabel string
-	W, H   float64
-}
-
-func NewMetaInfo(title, xlabel, ylabel string, w, h float64) *MetaInfo {
-	return &MetaInfo{
-		Title:  title,
-		XLabel: xlabel,
-		YLabel: ylabel,
-		W:      w,
-		H:      h,
-	}
-}
-
 func Plot(
 	pts plotter.XYs,
 	filename string,

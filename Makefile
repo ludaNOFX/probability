@@ -1,14 +1,14 @@
 .PHONY: build clean run
 
 build:
-	go build -o bin/computer_simulation ./cmd/computer_simulation
-	go build -o bin/random_variable_model ./cmd/random_variable_model
+	go build -o bin/computer_simulation/cmps ./cmd/computer_simulation
+	go build -o bin/random_variable_model/rvm ./cmd/random_variable_model
 
 run-computer:
-	./bin/computer_simulation
+	./bin/computer_simulation/cmps
 
 run-random: 
-	./bin/random_variable_model
+	./bin/random_variable_model/rvm
 
 clean:
 	rm -rf bin/
